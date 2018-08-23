@@ -1,6 +1,7 @@
 # AAFMM Manual
 Augment Applications in Fitting Mixed Models
 
+#### Attension: AAFMM is still on developing and testing, it might not be worked well at present.
 
 ## About AAFMM
 
