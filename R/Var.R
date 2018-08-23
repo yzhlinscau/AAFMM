@@ -92,7 +92,7 @@ Var.lme <- function (object) {
     
     # change sd to se
     ncM<-ncol(Var1)
-    pvar <-nlm$apVar
+    pvar <-object$apVar
     par1<-attr(pvar, "Pars")
 
     #library(msm)
@@ -180,7 +180,7 @@ Var.remlf90 <- function (object,mulT=FALSE) {
     df$constraint<-const(df$gamma)
     
     df<-df[,c(3,1:2,4:5)]
-    colnames(df)[2:3]<-c('component','std.error')
+    colnames(df)[2:3]<-c('component','se')
     
     df
     return(df)
