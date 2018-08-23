@@ -1,0 +1,27 @@
+Package: AAFMM
+Type: Package
+Title: Augment Applications in Fitting Mixed Models
+Version: 1.0.0
+Authors@R: person("Yuanzhen", "Lin", email = "yzhlinscau@163.com", role = c("cre", "aut"))
+URL: http://github.com/yzhlinscau/AAFMM
+BugReports: http://github.com/yzhlinscau/AAFMM/issues
+Depends: R (>= 3.3.0)
+Imports: agricolae,agridat,amap,corrgram,dplyr,ggplot2,gplots,graphics,lme4,
+         MASS,Matrix,methods,msm,nlme,plyr,reshape2,sqldf,stats,tidyr
+Suggests: nadiv
+Enhances: asreml,asreml4,breedR
+Date: 2018-07-27
+Author: Yuanzhen Lin [cre, aut]
+Maintainer: Yuanzhen Lin <yzhlinscau@163.com>
+Description: This package adds some functions when fitting mixed models in R packages, functions including:
+    batch analysis for mixed models in R packages, such as 'lme4', 'nlme','breedR' and 'asreml'. Also includes
+    other functions to calculate standard error for heritability or correlation. Some functions have been 
+    created to be used in conjunction with the R package 'asreml' for the 'ASReml' software, which can be
+    obtained upon purchase from 'VSN' international(<http://www.vsni.co.uk/software/asreml>). Also some 
+    functions is conjuncted with the R package 'breedR' which can be freely obtained from 'github'
+    (<https://github.com/famuvie/breedR>)
+License: GPL (>= 2)
+LazyData: yes
+NeedsCompilation: no
+Repository: CRAN
+RoxygenNote: 6.0.1
