@@ -28,11 +28,11 @@ export(sig.level2)
 export(snp.batch)
 export(spd.plot)
 
-import(amap,agricolae,#agridat,
+import(amap,agricolae,agridat,
        corrgram,dplyr,ggplot2,
        gplots,lme4,MASS,Matrix,
-       methods,nlme,plyr,stats,
-       reshape2,sqldf,tidyr)
+       methods,msm,nlme,plyr,stats,
+       graphics,reshape2,sqldf,tidyr)
 
 #importFrom(nlme,VarCorr)
 #importFrom(nlme,summary)
