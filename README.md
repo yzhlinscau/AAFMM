@@ -19,6 +19,7 @@ devtools::install_github('yzhlinscau/AAFMM')
   - model.comp() to run model comparisons for `'asreml'`;
   - Var() to get variance components similar to `'asreml'`;
   - plot1() to run norm test for `'breedR'` or plot multi-comparisons;
+  - read.file() to read file similar to asreml.read.table();
   - etc...
 
 
