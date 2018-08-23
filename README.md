@@ -30,9 +30,10 @@ demo('VarF')
 
 ## function 1 read.file(): read file similar to asreml.read.table()
 ``` r
-path<-system.file("extdata", "fm.csv", package = "AAFMM")
+path<-system.file("extdata",  package = "AAFMM")
+setwd(path)
 
-df<-AAFMM::read.file(path)
+df<-AAFMM::read.file(file="fm.csv", header=T)
 str(df)
 ## 
 ## 'data.frame':	827 obs. of  13 variables:
@@ -46,7 +47,7 @@ str(df)
 ##  $ wd     : num  0.358 0.365 0.379 0.363 0.332 0.392 0.388 0.369 0.347 0.324 ...
 ##  ...
 
-df1<-read.csv(path)
+df1<-read.csv(file="fm.csv", header=T)
 str(df1)
 ## 
 ## 'data.frame':	827 obs. of  13 variables:
@@ -59,6 +60,10 @@ str(df1)
 ##  $ dm     : num  0.405 0.393 0.429 0.408 0.372 0.45 0.509 0.381 0.393 0.361 ...
 ##  $ wd     : num  0.358 0.365 0.379 0.363 0.332 0.392 0.388 0.369 0.347 0.324 ...
 ##  ...
+
+df2<-AAFMM::read.file(file="barley.asd", header=T, sep=',')
+df3<-AAFMM::read.file(file="mmex.txt", header=T, sep='\t')
+df4<-AAFMM::read.file(file="ZINC.DAT", header=T, sep=' ')
 ```
 
 ### More details will be updated in the future.
