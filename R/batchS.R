@@ -185,7 +185,7 @@ batchS<- function(data,type,FMod,RMod=NULL,EMod=NULL,
   
   res.ls<-AAFMM::mf.tr(Var1,type='nlme') #AAFMM::
   
-  res.ls$AIC<-nlme::summary(nlm)$AIC
+  res.ls$AIC<-summary(nlm)$AIC
   
   return(res.ls)
  }
@@ -201,7 +201,7 @@ batchS<- function(data,type,FMod,RMod=NULL,EMod=NULL,
   Var<-as.data.frame(t(Var))
   
   res.ls<-AAFMM::mf.tr(Var,type='lme4') #AAFMM::
-  res.ls$AIC<-lme4::summary(lme)$AICtab
+  res.ls$AIC<-summary(lme)$AICtab
   
   return(res.ls)
  }
@@ -216,7 +216,7 @@ batchS<- function(data,type,FMod,RMod=NULL,EMod=NULL,
    # get varcomponents, here should be careful
    # transpose var's results (N X 2) into 2 X N
    # N is random factor's total number
-   Var<-t(breedR::summary(bdR)$var) 
+   Var<-t(breedR:::summary(bdR)$var) 
    Var<-as.data.frame(Var)
 
    res.ls<-AAFMM::mf.tr(Var,type='breedR') #AAFMM::
