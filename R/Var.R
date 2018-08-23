@@ -159,7 +159,7 @@ Var.remlf90 <- function (object,mulT=FALSE) {
 
     df<-NULL
   
-    df<-as.data.frame(breedR::summary(object)$var)
+    df<-as.data.frame(summary(object)$var)
     
     df$gamma<-df[,1]/df[nrow(df),1]
     if(mulT==TRUE) df$gamma<-df[,1]
