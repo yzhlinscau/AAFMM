@@ -20,6 +20,7 @@
 #' @export pin4
 #' @export sig.level
 #' @export sig.level2
+#' @export read.file
 #' @export
 pin <- function(object,formula,asrV,signif,
                 corN,Rdf,digit,vres){
@@ -414,3 +415,17 @@ sig.level2 <- function(x){
 # p=1-pt(ratio,Inf)
 # using df=Inf, because we generally have data points more than 99.
 
+# ----------------------------------------------------------------------------
+# function similar to asreml.read.table():
+# making variables starting with capital letter to factors.
+# ----------------------------------------------------------------------------
+
+read.file<-function(file,header=TRUE,sep=',',dec='.',...){
+  df<-read.table(file=file,header=header,sep=sep,dec=dec,...)
+  aa<-names(df)
+  
+  sn<-grep('^[A-Z]{1}',aa)
+  for(i in sn) df[,i]<-factor(df[,i])
+  
+  return(df)
+}
