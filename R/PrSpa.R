@@ -1,0 +1,25 @@
+#' @title Tree spacing trial dataset
+#' 
+#' @description A dataset of spacing trials of Pinus radiata
+#' 
+#' @docType data
+#' @keywords datasets
+#' @name PrSpa
+#' @usage data(PrSpa)
+#' @format one dataset with 13 variables
+#' \describe{
+#'  \item{TreeID}{Tree Sample code}
+#'  \item{Spacing}{3 levels}
+#'  \item{Rep}{Replication code}
+#'  \item{Fam}{Family code}
+#'  \item{Plot}{Plot code}
+#'  \item{dj}{a numeric vector}
+#'  \item{dm}{a numeric vector}
+#'  \item{wd}{a numeric vector}
+#'  \item{h1}{a numeric vector}
+#'  \item{h2}{a numeric vector}
+#'  \item{h3}{a numeric vector}
+#'  \item{h4}{a numeric vector}
+#'  \item{h5}{a numeric vector}
+#' }
+NULL
