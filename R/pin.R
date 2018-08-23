@@ -100,7 +100,7 @@ pin <- function(object,formula,asrV,signif,
 #' summary(fm)$varcomp[,1:3]
 #' 
 #' pin(fm1b, h2 ~4*V1/(V1+V2),asrV=4)
-#' pin4(fm1b, h2 ~4*V1/(V1+V2)) # same results, but with pin4()
+#' #pin4(fm1b, h2 ~4*V1/(V1+V2)) # same results, but with pin4()
 #' 
 #' # The same model with fm1b, but with sigma parameterization.
 #' fm1c<-asreml(h5~1+Rep, random=~Fam, 
@@ -110,7 +110,7 @@ pin <- function(object,formula,asrV,signif,
 #' summary(fm1c)$varcomp[,1:3]
 #' 
 #' pin(fm1c, h2 ~4*V1/(V1+V3),asrV=4)
-#' pin4(fm1c, h2 ~4*V1/(V1+V3))
+#' #pin4(fm1c, h2 ~4*V1/(V1+V3))
 #' 
 #' # exmaple 2.2 us model
 #' fm2b<-asreml(cbind(h3,h5)~ trait+trait:Rep, 
@@ -122,19 +122,19 @@ pin <- function(object,formula,asrV,signif,
 #' 
 #' # heritability for trait A
 #' pin(fm2b, h2_A ~ 4 * V1/(V1+V5),asrV=4) 
-#' pin4(fm2b, h2_A ~ 4 * V1/(V1+V5)) 
+#' #pin4(fm2b, h2_A ~ 4 * V1/(V1+V5)) 
 #' 
 #' # heritability for trait B
 #' pin(fm2b, h2_B ~ 4 * V3/(V3+V7),asrV=4) 
-#' pin4(fm2b, h2_B ~ 4 * V3/(V3+V7))
+#' #pin4(fm2b, h2_B ~ 4 * V3/(V3+V7))
 #' 
 #' # genetic corr
 #' pin(fm2b, gCORR ~ V2/sqrt(V1*V3),signif=TRUE,asrV=4)
-#' pin4(fm2b, gCORR ~ V2/sqrt(V1*V3),signif=TRUE)
+#' #pin4(fm2b, gCORR ~ V2/sqrt(V1*V3),signif=TRUE)
 #' 
 #' # phenotype corr
 #' pin(fm2b, pCORR ~ (V2+V6)/sqrt((V1+V5)*(V3+V7)),signif=TRUE,asrV=4) 
-#' pin4(fm2b, pCORR ~ (V2+V6)/sqrt((V1+V5)*(V3+V7)),signif=TRUE) 
+#' #pin4(fm2b, pCORR ~ (V2+V6)/sqrt((V1+V5)*(V3+V7)),signif=TRUE) 
 #' 
 #' # exmaple 2.3 corr model
 #' fm3b<-asreml(cbind(h3,h4,h5)~ trait+trait:Rep, 
@@ -145,7 +145,7 @@ pin <- function(object,formula,asrV,signif,
 #' summary(fm3b)$varcomp[,1:3]
 #' 
 #' pin(fm3b,corN=3,asrV=4) 
-#' pin4(fm3b,corN=3) 
+#' #pin4(fm3b,corN=3) 
 #' }
 #' 
 #' 
@@ -176,10 +176,10 @@ pin.asreml <-
       tname <- if(length(formula) == 3) formula[[2]] 
       else deparse(formula[[2]])
       
-      if(asrV==4&object$sigma2==1){
-        X <- matrix(as.vector(attr(tvalue, "gradient")), ncol=1)
-        se <- as.vector(sqrt(t(X) %*% object$ai %*% X))
-      }else{
+      #if(asrV==4&object$sigma2==1){
+      #  X <- matrix(as.vector(attr(tvalue, "gradient")), ncol=1)
+      #  se <- as.vector(sqrt(t(X) %*% object$ai %*% X))
+      #}else{
         X <- as.vector(attr(tvalue, "gradient"))
         if(asrV==3){
           X[object$gammas.type==1] <- 0
@@ -195,7 +195,7 @@ pin.asreml <-
         k <- 1 + (i > j)
         
         se <- sqrt(sum(Vmat * X[i] * X[j] * k))
-      }
+      #}
       
       vv <- vector() 
       vv[1] <- round(tvalue,digit)
@@ -332,9 +332,9 @@ pin4 <- function (object, formula=NULL,signif=FALSE,
       k <- 1 + (i > j)
       Vmat <- object$ai@x
       se <- sqrt(sum(Vmat * X[i] * X[j] * k))
-    } else {
-      X <- matrix(as.vector(attr(tvalue, "gradient")), ncol = 1)
-      se <- as.vector(sqrt(t(X) %*% object$ai %*% X))
+    #} else {
+    #  X <- matrix(as.vector(attr(tvalue, "gradient")), ncol = 1)
+    #  se <- as.vector(sqrt(t(X) %*% object$ai %*% X))
     }
     
     tvalue <- round(tvalue,digit)
