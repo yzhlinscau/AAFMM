@@ -29,19 +29,19 @@ export(sig.level2)
 export(snp.batch)
 export(spd.plot)
 
-import(amap,agricolae,agridat,
+import(amap,agricolae,#agridat,
        corrgram,dplyr,ggplot2,
        gplots,lme4,MASS,Matrix,
        methods,msm,nlme,plyr,stats,
        graphics,reshape2,sqldf,tidyr)
 
 #importFrom(nlme,VarCorr)
-#importFrom(nlme,summary)
+#importFrom(nlme,summary.lme)
 #importFrom(stats,hclust)
 #importFrom(stats,as.dist)
 #importFrom(stats,biplot)
 #importFrom(graphics,filled.contour)
 #importFrom(graphics,par)
 #importFrom(graphics,pairs)
-#importFrom(agridat,desplot)
+#importFrom(desplot,desplot)
 #importFrom(msm,deltamethod)
