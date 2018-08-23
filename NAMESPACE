@@ -35,7 +35,7 @@ import(amap,agricolae,#agridat,
        reshape2,sqldf,tidyr)
 
 importFrom(nlme,VarCorr)
-importFrom(nlme,summary)
+#importFrom(nlme,summary)
 importFrom(stats,hclust)
 importFrom(stats,as.dist)
 importFrom(stats,biplot)
