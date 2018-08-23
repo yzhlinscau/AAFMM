@@ -216,7 +216,7 @@ batchS<- function(data,type,FMod,RMod=NULL,EMod=NULL,
    # get varcomponents, here should be careful
    # transpose var's results (N X 2) into 2 X N
    # N is random factor's total number
-   Var<-t(breedR:::summary(bdR)$var) 
+   Var<-t(summary(bdR)$var) 
    Var<-as.data.frame(Var)
 
    res.ls<-AAFMM::mf.tr(Var,type='breedR') #AAFMM::
@@ -251,7 +251,7 @@ batchS<- function(data,type,FMod,RMod=NULL,EMod=NULL,
                        na.method.X='include',
                        data=data, trace=FALSE)
   
-  Var<-t(asreml::summary(asr)$varcomp[,2:3])
+  Var<-t(summary(asr)$varcomp[,2:3])
   Var<-as.data.frame(Var)
 
   res.ls<-AAFMM::mf.tr(Var,type='asreml') # 
@@ -277,7 +277,7 @@ batchS<- function(data,type,FMod,RMod=NULL,EMod=NULL,
     names(res.ls)[(nn1+1):(nn1+2)]<-names(vv2)
   }
   
-  loglik<-round(asreml::summary(asr)$loglik,3)
+  loglik<-round(summary(asr)$loglik,3)
   res.ls$AIC<- -2*(loglik-nnM)
   
   return(res.ls)
