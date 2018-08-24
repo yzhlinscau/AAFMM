@@ -72,7 +72,7 @@ df2<-AAFMM::read.file(file="barley.asd", header=T, sep=',')
 df3<-AAFMM::read.file(file="mmex.txt", header=T, sep='\t')
 df4<-AAFMM::read.file(file="ZINC.DAT", header=T, sep=' ')
 ```
-User can use `readxl` package to read excel files:
+User can use `readxl` package to read excel files and use fdata() to format dataset:
 ``` r
 read.example(package='readxl')
 ## [1] "clippy.xls"    "clippy.xlsx"   "datasets.xls"  "datasets.xlsx"
@@ -83,7 +83,24 @@ read.example(package='readxl', setpath=T)
 df5<-readxl::read_excel("datasets.xls", sheet=1)
 df6<-readxl::read_excel("datasets.xlsx", sheet=1)
 readxl::excel_sheets("datasets.xlsx")
-## [1] "iris"     "mtcars"   "chickwts" "quakes"  
+## [1] "iris"     "mtcars"   "chickwts" "quakes" 
+
+df5b<-AAFMM::fdata(data=df5,faS=5)
+
+str(df5)
+## Classes ‘tbl_df’, ‘tbl’ and 'data.frame':	150 obs. of  5 variables:
+##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+##  $ Species     : chr  "setosa" "setosa" "setosa" "setosa" ...
+str(df5b)
+## 'data.frame':	150 obs. of  5 variables:
+##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+##  $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 1 1 1 1 1 1 1 1 1 ...
 ```
 
 ## function 2 batchS(): run batch analysis of single trait for mixed models
