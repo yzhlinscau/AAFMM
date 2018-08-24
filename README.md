@@ -16,7 +16,7 @@ devtools::install_github('yzhlinscau/AAFMM')
 
   - pin() to calculate heritability or corr with se for both `'breedR' and 'asreml'`;
   - batchS() to run batch analysis of single trait for `'lme4', 'nlme','breedR' and 'asreml'`;
-  - model.comp() to run model comparisons for `'asreml'`;
+  - model.comp() to run model comparisons for `'asreml'`, will be availabe for `'breedR'` soon;
   - Var() to get variance components similar to `'asreml'`;
   - plot1() to run norm test for `'breedR'` or plot multi-comparisons;
   - read.file() to read file similar to asreml.read.table();
