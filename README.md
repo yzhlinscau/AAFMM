@@ -202,6 +202,6 @@ heatmap1(mydata,type='data',Sig=TRUE,Nbreaks = 8)
 ```
 <img src="README_files/img/heatmap2.png" width="65%" style="display: block; margin: auto;" />
 
-heatmap1() can also plot for any one or two matrix with the same dims.
+heatmap1() can also plot for any one or two matrix with the same dims. More examples could be found by `?heatmap1`.
 
 ### More details will be updated in the future.
