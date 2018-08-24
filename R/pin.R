@@ -22,6 +22,7 @@
 #' @export sig.level2
 #' @export read.file
 #' @export read.example
+#' @export fdata
 #' @export
 pin <- function(object,formula,asrV,signif,
                 corN,Rdf,digit,vres){
@@ -430,7 +431,20 @@ read.file<-function(file,header=TRUE,sep=',',dec='.',...){
   
   return(df)
 }
-
+  
+fdata<-function(data,faS=NULL){
+  data<-as.data.frame(data)
+  if(is.null(faS)){
+    aa<-names(data)
+    
+    sn<-grep('^[A-Z]{1}',aa)
+  } else sn<-faS
+  
+  for(i in sn) data[,i]<-factor(data[,i])
+  
+  return(data)
+}
+  
 read.example <- function(package,setpath = FALSE) {
   if (setpath== FALSE) {
     dir(system.file("extdata", package = package))
