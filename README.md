@@ -1,7 +1,7 @@
 # AAFMM Manual
 Augment Applications in Fitting Mixed Models
 
-#### Attension: AAFMM is still on developing and testing, it might not be worked well at present.
+#### Attension: AAFMM is still under developing and testing, it might not be worked well at present. When using `'asreml'` package, R version should be 3.x. 
 
 ## About AAFMM
 
@@ -65,5 +65,85 @@ df2<-AAFMM::read.file(file="barley.asd", header=T, sep=',')
 df3<-AAFMM::read.file(file="mmex.txt", header=T, sep='\t')
 df4<-AAFMM::read.file(file="ZINC.DAT", header=T, sep=' ')
 ```
+
+## function 2 batchS(): run batch analysis of single trait for mixed models
+``` r
+## 00 data
+gdf<-tidyr::gather(df,key=Trait,y,c(-1:-5))
+str(gdf)
+## 
+## 'data.frame':	6616 obs. of  7 variables:
+##  $ TreeID : Factor w/ 827 levels "80001","80002",..: 1 2 3 4 5 6 7 8 9 10 ...
+##  $ Spacing: Factor w/ 2 levels "2","3": 2 2 2 2 2 2 2 2 2 2 ...
+##  $ Rep    : Factor w/ 5 levels "1","2","3","4",..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ Fam    : Factor w/ 55 levels "70001","70002",..: 44 44 44 15 15 2 2 10 10 10 ...
+##  $ Plot   : Factor w/ 4 levels "1","2","3","4": 1 2 4 1 4 2 4 1 2 3 ...
+##  $ Trait  : chr  "dj" "dj" "dj" "dj" ...
+##  $ y      : num  0.334 0.348 0.354 0.335 0.322 0.359 0.368 0.358 0.323 0.298 ...
+
+
+## 01 nlme package
+library(nlme) # V3.1-131
+
+Fixed.Mod1<- y ~ 1+Spacing
+Ran.Mod1<- ~1|Rep/Fam
+
+plyr::ddply(gdf,'Trait', 
+                     function(dat) batchS(data=dat,type='nlme',
+                                          FMod=Fixed.Mod1,
+                                          RMod=Ran.Mod1))
+                                          
+## 
+##   Trait      Fam Fam.sd      Rep Rep.sd Residual Residual.sd       AIC
+## 1    dj    0.000  0.010    0.000  0.007    0.000       0.021 -3841.240
+## 2    dm    0.000  0.009    0.000  0.007    0.002       0.043 -2781.951
+## 3    h1   16.320  4.040    7.755  2.785   46.093       6.789  5724.071
+## 4    h2  102.431 10.121  131.369 11.462  572.045      23.917  7728.209
+## 5    h3  278.863 16.699  206.386 14.366 1452.051      38.106  8501.298
+## 6    h4  708.017 26.609 1014.192 31.846 3352.981      57.905  9170.477
+## 7    h5 1278.013 35.749 1552.763 39.405 4705.333      68.595  9476.117
+## 8    wd    0.000  0.011    0.000  0.009    0.001       0.024 -3673.679
+
+## 02 lme4 package
+library(lme4)  # V1.1-17
+
+Fixed.Mod2<- y ~ 1+Spacing+(1|Rep)+(1|Fam)
+
+plyr::ddply(gdf,'Trait', 
+                     function(dat) batchS(data=dat,type='lme4',
+                                          FMod=Fixed.Mod2))
+
+
+## 
+##    Trait     Fam Fam.sd      Rep Rep.sd Residual Residual.sd       AIC
+##  1    dj   0.000  0.008    0.000  0.007    0.000       0.022 -3874.425
+##  2    dm   0.000  0.011    0.000  0.006    0.002       0.043 -2805.411
+##  3    h1  11.332  3.366    8.226  2.868   50.760       7.125  5684.554
+##  ...
+
+
+## 03 breedR package
+library(breedR) # V0.12-1
+
+Fixed.Mod3<- y ~ 1+Spacing
+Ran.Mod3<- ~ Rep+Fam
+
+plyr::ddply(gdf,'Trait', 
+                       function(dat) batchS(data=dat,type='breedR',
+                                            FMod=Fixed.Mod3,
+                                            RMod=Ran.Mod3))
+
+## 
+##    Trait     Fam  Fam.se      Rep   Rep.se Residual Residual.se       AIC
+##  1    dj   0.000   0.000    0.000    0.000    0.000       0.000 -3866.833
+##  2    dm   0.000   0.000    0.000    0.000    0.002       0.000 -2795.981
+##  3    h1  11.332   2.855    8.226    6.045   50.760       2.591  5690.306
+##  ...
+
+
+
+```
+
+
 
 ### More details will be updated in the future.
