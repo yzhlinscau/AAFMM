@@ -168,7 +168,7 @@ Var(bdR)
 ## Fam      0.07157789    398.56  151.85  2.624695   Positive
 ## Residual 1.00000000   5568.20  284.85 19.547832   Positive
 
-pin(res.animal,h2~V2/(V1+V2+V3))
+pin(bdR, h2 ~4*V2/(V2+V3))
 ##    Estimate    SE
 ## h2    0.267 0.097 
 
@@ -187,7 +187,15 @@ pin(asr, h2 ~4*V2/(V2+V3))
 ##    Estimate     SE
 ## h2    0.267 0.0975 
 ```
+## function 4 heatmap1():
+``` r
+mydata<-df[,-1:-5]
 
+## plot data.frame
+heatmap1(mydata,type='data',Sig=FALSE,Nbreaks = 8)
+
+heatmap1(mydata,type='data',Sig=TRUE,Nbreaks = 8)
+```
 
 
 ### More details will be updated in the future.
