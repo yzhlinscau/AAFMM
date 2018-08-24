@@ -241,12 +241,12 @@ batchS<- function(data,type,FMod,RMod=NULL,EMod=NULL,
   if(is.null(EMod)) EMod=~ units
   
   # only for asreml V3.0
-  if(ped==TRUE) {
-    asr<- do.call(asreml::asreml,list(fixed=FMod, random=RMod, rcov=EMod,
-                                      na.method.X='include',
-                                      maxit=maxit, ginverse=ginverse,
-                                      data=quote(data), trace=FALSE))
-  }
+  #if(ped==TRUE) {
+  #  asr<- do.call(asreml::asreml,list(fixed=FMod, random=RMod, rcov=EMod,
+  #                                    na.method.X='include',
+  #                                    maxit=maxit, ginverse=ginverse,
+  #                                    data=quote(data), trace=FALSE))
+  #}
   asr<-asreml::asreml(fixed=FMod, random=RMod, rcov=EMod,
                        na.method.X='include',
                        data=data, trace=FALSE)
