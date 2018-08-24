@@ -60,7 +60,9 @@ str(df1)
 ##  $ dm     : num  0.405 0.393 0.429 0.408 0.372 0.45 0.509 0.381 0.393 0.361 ...
 ##  $ wd     : num  0.358 0.365 0.379 0.363 0.332 0.392 0.388 0.369 0.347 0.324 ...
 ##  ...
-
+``` 
+read.file() can also read other types of files, but not work for excel files. Excel files(.xls, xlsx) is recommended to change into .csv files at first.
+``` r
 df2<-AAFMM::read.file(file="barley.asd", header=T, sep=',')
 df3<-AAFMM::read.file(file="mmex.txt", header=T, sep='\t')
 df4<-AAFMM::read.file(file="ZINC.DAT", header=T, sep=' ')
