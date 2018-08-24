@@ -91,8 +91,7 @@ Ran.Mod1<- ~1|Rep/Fam
 plyr::ddply(gdf,'Trait', 
                      function(dat) batchS(data=dat,type='nlme',
                                           FMod=Fixed.Mod1,
-                                          RMod=Ran.Mod1))
-                                          
+                                          RMod=Ran.Mod1))                                          
 ## 
 ##   Trait      Fam Fam.sd      Rep Rep.sd Residual Residual.sd       AIC
 ## 1    dj    0.000  0.010    0.000  0.007    0.000       0.021 -3841.240
@@ -112,8 +111,6 @@ Fixed.Mod2<- y ~ 1+Spacing+(1|Rep)+(1|Fam)
 plyr::ddply(gdf,'Trait', 
                      function(dat) batchS(data=dat,type='lme4',
                                           FMod=Fixed.Mod2))
-
-
 ## 
 ##    Trait     Fam Fam.sd      Rep Rep.sd Residual Residual.sd       AIC
 ##  1    dj   0.000  0.008    0.000  0.007    0.000       0.022 -3874.425
@@ -132,7 +129,6 @@ plyr::ddply(gdf,'Trait',
                        function(dat) batchS(data=dat,type='breedR',
                                             FMod=Fixed.Mod3,
                                             RMod=Ran.Mod3))
-
 ## 
 ##    Trait     Fam  Fam.se      Rep   Rep.se Residual Residual.se       AIC
 ##  1    dj   0.000   0.000    0.000    0.000    0.000       0.000 -3866.833
@@ -141,7 +137,55 @@ plyr::ddply(gdf,'Trait',
 ##  ...
 
 
+## 04 asreml package
+library(asreml) #V3.0
 
+Fixed.Mod4<- y ~ 1+Spacing
+Ran.Mod4<- ~Rep+Fam
+
+plyr::ddply(gdf,'Trait', 
+                       function(dat) batchS(data=dat,type='asreml',
+                                            FMod=Fixed.Mod4,
+                                            RMod=Ran.Mod4))
+## 
+##    Trait     Fam  Fam.se        R    R.se      Rep   Rep.se       AIC
+##  1    dj   0.000   0.000    0.000   0.000    0.000    0.000 -5382.836
+##  2    dm   0.000   0.000    0.002   0.000    0.000    0.000 -4311.984
+##  3    h1  11.332   2.855   50.760   2.591    8.226    6.046  4174.306
+##  ...
+```
+
+## function 3 pin(): calculate heritability or corr with se for both `'breedR' and 'asreml'`
+``` r
+## 01 breedR package
+library(breedR)
+
+bdR <- remlf90( h5 ~ 1+Spacing, random = ~ Rep+Fam, data = df)
+
+Var(bdR)
+##               gamma component      se   z.ratio constraint
+## Rep      0.27067993   1507.20 1090.50  1.382118   Positive
+## Fam      0.07157789    398.56  151.85  2.624695   Positive
+## Residual 1.00000000   5568.20  284.85 19.547832   Positive
+
+pin(res.animal,h2~V2/(V1+V2+V3))
+##    Estimate    SE
+## h2    0.267 0.097 
+
+## 02 asreml package
+library(asreml)
+asr<-asreml(h5~1+Spacing, random=~Rep+Fam, data=df)
+
+#summary(asr)$varcomp[,1:3]
+Var(asr)
+##                  gamma component std.error   z.ratio constraint
+## Rep!Rep.var 0.27068333 1507.2276 1090.4791  1.382170   Positive
+## Fam!Fam.var 0.07157818  398.5639  151.8484  2.624748   Positive
+## R!variance  1.00000000 5568.2319  284.8484 19.548054   Positive
+
+pin(asr, h2 ~4*V2/(V2+V3))
+##    Estimate     SE
+## h2    0.267 0.0975 
 ```
 
 
