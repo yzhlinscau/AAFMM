@@ -187,15 +187,19 @@ pin(asr, h2 ~4*V2/(V2+V3))
 ##    Estimate     SE
 ## h2    0.267 0.0975 
 ```
-## function 4 heatmap1():
+## function 4 heatmap1(): plot heatmap for data.frame or matrix with significant levels
 ``` r
 mydata<-df[,-1:-5]
 
-## plot data.frame
 heatmap1(mydata,type='data',Sig=FALSE,Nbreaks = 8)
+```
+<img src="README_files/img/heatmap1.png" width="65%" style="display: block; margin: auto;" />
 
+``` r
 heatmap1(mydata,type='data',Sig=TRUE,Nbreaks = 8)
 ```
+<img src="README_files/img/heatmap2.png" width="65%" style="display: block; margin: auto;" />
 
+heatmap1() can also plot for any one or two matrix with the same dims.
 
 ### More details will be updated in the future.
