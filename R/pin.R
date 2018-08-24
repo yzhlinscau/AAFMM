@@ -430,11 +430,11 @@ read.file<-function(file,header=TRUE,sep=',',dec='.',...){
   return(df)
 }
 
-read.example <- function(path = NULL) {
+read.example <- function(package,path = NULL) {
   if (is.null(path)) {
-    dir(system.file("extdata", package = "AAFMM"))
+    dir(system.file("extdata", package = package))
   } else {
-    system.file("extdata", path, package = "AAFMM", mustWork = TRUE)
+    system.file("extdata", path, package = package, mustWork = TRUE)
   }
-}  
+} 
   
