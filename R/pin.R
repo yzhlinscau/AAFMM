@@ -431,11 +431,12 @@ read.file<-function(file,header=TRUE,sep=',',dec='.',...){
   return(df)
 }
 
-read.example <- function(package,path = NULL) {
-  if (is.null(path)) {
+read.example <- function(package,setpath = FALSE) {
+  if (setpath== FALSE) {
     dir(system.file("extdata", package = package))
   } else {
-    system.file("extdata", path, package = package, mustWork = TRUE)
+    path<-system.file("extdata", package = package)
+    setwd(path)
   }
 } 
   
