@@ -72,7 +72,7 @@ df2<-AAFMM::read.file(file="barley.asd", header=T, sep=',')
 df3<-AAFMM::read.file(file="mmex.txt", header=T, sep='\t')
 df4<-AAFMM::read.file(file="ZINC.DAT", header=T, sep=' ')
 ```
-User can use `readxl` package to read excel files and use fdata() to format dataset:
+User can use `'readxl'` package to read excel files and use fdata() to format dataset:
 ``` r
 read.example(package='readxl')
 ## [1] "clippy.xls"    "clippy.xlsx"   "datasets.xls"  "datasets.xlsx"
@@ -105,7 +105,7 @@ str(df5b)
 
 ## function 2 batchS(): run batch analysis of single trait for mixed models
 ``` r
-## 00 data
+## 2.0 data
 gdf<-tidyr::gather(df,key=Trait,y,c(-1:-5))
 str(gdf)
 ## 
@@ -119,7 +119,7 @@ str(gdf)
 ##  $ y      : num  0.334 0.348 0.354 0.335 0.322 0.359 0.368 0.358 0.323 0.298 ...
 
 
-## 01 nlme package
+## 2.1 nlme package
 library(nlme) # V3.1-131
 
 Fixed.Mod1<- y ~ 1+Spacing
@@ -140,7 +140,7 @@ plyr::ddply(gdf,'Trait',
 ## 7    h5 1278.013 35.749 1552.763 39.405 4705.333      68.595  9476.117
 ## 8    wd    0.000  0.011    0.000  0.009    0.001       0.024 -3673.679
 
-## 02 lme4 package
+## 2.2 lme4 package
 library(lme4)  # V1.1-17
 
 Fixed.Mod2<- y ~ 1+Spacing+(1|Rep)+(1|Fam)
@@ -156,7 +156,7 @@ plyr::ddply(gdf,'Trait',
 ##  ...
 
 
-## 03 breedR package
+## 2.3 breedR package
 library(breedR) # V0.12-1
 
 Fixed.Mod3<- y ~ 1+Spacing
@@ -174,7 +174,7 @@ plyr::ddply(gdf,'Trait',
 ##  ...
 
 
-## 04 asreml package
+## 2.4 asreml package
 library(asreml) #V3.0
 
 Fixed.Mod4<- y ~ 1+Spacing
@@ -194,10 +194,10 @@ plyr::ddply(gdf,'Trait',
 
 ## function 3 pin(): calculate heritability or corr with se for both `'breedR' and 'asreml'`
 ``` r
-## 01 breedR package
+## 3.1 breedR package
 library(breedR)
 
-bdR <- remlf90( h5 ~ 1+Spacing, random = ~ Rep+Fam, data = df)
+bdR <- remlf90(h5 ~1+Spacing, random =~ Rep+Fam, data = df)
 
 Var(bdR)
 ##               gamma component      se   z.ratio constraint
@@ -209,9 +209,9 @@ pin(bdR, h2 ~4*V2/(V2+V3))
 ##    Estimate    SE
 ## h2    0.267 0.097 
 
-## 02 asreml package
+## 3.2 asreml package
 library(asreml)
-asr<-asreml(h5~1+Spacing, random=~Rep+Fam, data=df)
+asr<-asreml(h5~1+Spacing, random =~ Rep+Fam, data = df)
 
 #summary(asr)$varcomp[,1:3]
 Var(asr)
