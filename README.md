@@ -31,10 +31,11 @@ demo('VarF')
 ## function 1 read.file(): read file similar to asreml.read.table()
 ``` r
 read.example(package = "AAFMM")
-[1] "fm.csv"    "barley.asd"   "mmex.txt"  "ZINC.DAT"
+## [1] "fm.csv"   "barley.asd"   "mmex.txt"  "ZINC.DAT"
 
 read.example(package = "AAFMM", setpath = TRUE)
 getwd()
+## [1] "C:/Users/yzhlin/Documents/R/win-library/3.3/AAFMM/extdata"
 
 df<-AAFMM::read.file(file="fm.csv", header=T)
 #df<-read.file(file=read.example("fm.csv"), header=T)
@@ -70,6 +71,19 @@ read.file() can also read other types of files, but not work for excel files. Ex
 df2<-AAFMM::read.file(file="barley.asd", header=T, sep=',')
 df3<-AAFMM::read.file(file="mmex.txt", header=T, sep='\t')
 df4<-AAFMM::read.file(file="ZINC.DAT", header=T, sep=' ')
+```
+User can use `readxl` package to read excel files:
+``` r
+read.example(package='readxl')
+## [1] "clippy.xls"    "clippy.xlsx"   "datasets.xls"  "datasets.xlsx"
+## [5] "deaths.xls"    "deaths.xlsx"   "geometry.xls"  "geometry.xlsx"
+## [9] "type-me.xls"   "type-me.xlsx"
+
+read.example(package='readxl', setpath=T) 
+df5<-readxl::read_excel("datasets.xls", sheet=1)
+df6<-readxl::read_excel("datasets.xlsx", sheet=1)
+readxl::excel_sheets("datasets.xlsx")
+## [1] "iris"     "mtcars"   "chickwts" "quakes"  
 ```
 
 ## function 2 batchS(): run batch analysis of single trait for mixed models
