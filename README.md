@@ -1,7 +1,7 @@
 # AAFMM Manual
 Augment Applications in Fitting Mixed Models
 
-#### Attension: AAFMM is still under developing and testing, it might not be worked well at present. When using `'asreml'` package, R version should be 3.x. 
+#### Attension: AAFMM is still under developing and testing, it might not be worked well at present. When using `'asreml'` package, R version should be 3.x. If any suggestions, please send emails to yzhlinscau@163.com. 
 
 ## About AAFMM
 
