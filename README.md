@@ -30,11 +30,11 @@ demo('VarF')
 
 ## function 1 read.file(): read file similar to asreml.read.table()
 ``` r
-read.example()
+read.example(package = "AAFMM")
 [1] "fm.csv"    "barley.asd"   "mmex.txt"  "ZINC.DAT"
 
-path<-system.file("extdata",  package = "AAFMM")
-setwd(path)
+read.example(package = "AAFMM", setpath = TRUE)
+getwd()
 
 df<-AAFMM::read.file(file="fm.csv", header=T)
 #df<-read.file(file=read.example("fm.csv"), header=T)
