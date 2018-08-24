@@ -21,6 +21,7 @@
 #' @export sig.level
 #' @export sig.level2
 #' @export read.file
+#' @export read.example
 #' @export
 pin <- function(object,formula,asrV,signif,
                 corN,Rdf,digit,vres){
