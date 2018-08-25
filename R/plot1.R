@@ -84,7 +84,7 @@ plot1.group <-
     
     #require(agricolae) # V1.2-8
     #require(gplots)
-    #require(plyr)
+    #require(dplyr)
     
     # if (!inherits(object, "list")) 
     #   stop("Object must be a list for agricolae multi-comparison.")
@@ -105,17 +105,28 @@ plot1.group <-
     
     y.min<-y.zero
     y.max<-2*max(mu.i+se.i)#+10
-    y.max2<-1.3*(mu.i + se.i)# +2
+    y.max2<-(mu.i + se.i) + 0.1*mean(mu.i +se.i,na.rm=T)
     
     #windows(10,8)
-    bp <- gplots::barplot2(mu.i, names.arg=trt, col="red", 
-                           ylab=list(y.lbls, cex=1.5,font=2),xpd=FALSE,                  
-                           ylim=c(min(y.min),y.max),density=10,font=2, 
-                           plot.ci=TRUE, ci.l=mu.i-se.i, ci.u=mu.i+se.i)
-    text(bp, y.max2, lbls, cex=1.5,font=2, pos=3,col="blue")
-    title(cex.main=1.5,font=2,main="Comparison between\ntreatment means",
-          xlab=list(x.lbls, cex=1.5,font=2))
-    box()
+    # bp <- gplots::barplot2(mu.i, names.arg=trt, col="red",
+    #                        ylab=list(y.lbls, cex=1.5,font=2),xpd=FALSE,
+    #                        ylim=c(min(y.min),y.max),density=10,font=2,
+    #                        plot.ci=TRUE, ci.l=mu.i-se.i, ci.u=mu.i+se.i)
+    # text(bp, y.max2, lbls, cex=1.5,font=2, pos=3,col="blue")
+    # title(cex.main=1.5,font=2,main="Comparison between\ntreatment means",
+    #       xlab=list(x.lbls, cex=1.5,font=2))
+    # box()
+    
+    df<-data.frame(trt=trt,m=mu.i,lbls=lbls)
+    labels<-data.frame(y=y.max2,lbls=lbls)
+    limit<-aes(ymin=mu.i-se.i,ymax=mu.i+se.i)
+    
+    ggplot(df,aes(x=trt,y=m))+
+      geom_bar(fill='white',color='red',stat='identity',width=.5)+
+      geom_errorbar(limit,width=.3)+ylim(min(y.min,na.rm=T),NA)+
+      geom_text(aes(y=y,label=lbls),data=labels)+
+      labs(title="Comparison between treatment means",x=x.lbls,y=y.lbls)+
+      theme_bw()
   
 }
 
