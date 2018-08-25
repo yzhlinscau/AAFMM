@@ -14,7 +14,7 @@ export(batchS)
 export(dial.combn)
 export(fdata)
 export(heatmap1)
-export(ir2r.sp)
+#export(ir2r.sp)
 export(met.biplot)
 export(met.corr)
 export(met.plot)
@@ -31,11 +31,11 @@ export(sig.level2)
 export(snp.batch)
 export(spd.plot)
 
-import(amap,agricolae,#agridat,
-       corrgram,dplyr,ggplot2,
-       gplots,lme4,MASS,Matrix,
-       methods,msm,nlme,plyr,stats,
-       graphics,reshape2,sqldf,tidyr)
+import(amap,agricolae,
+       dplyr,ggplot2,
+       MASS,Matrix,
+       methods,msm,stats,
+       graphics,reshape2)
 
 #importFrom(nlme,VarCorr)
 #importFrom(nlme,summary.lme)
