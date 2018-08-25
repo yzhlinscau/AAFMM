@@ -13,7 +13,7 @@
 #' @param LRT	 Value TRUE for Likelihood ratio test (LRT), default (FALSE) for no LRT. 
 #' @param rdDF	 Value TRUE to control Ddf minus 0.5, default FALSE for LRT with Ddf. 
 #' If TRUE, Ddf would minus 0.5, ie, Ddf=Ddf-0.5.
-#' @param asrV asreml version 3(default, V3), or 4 (new version V4). 
+#' @param asrV asreml version 3(default, V3). 
 #' 
 #' @export model.comp
 #' @author Yuanzhen Lin <yzhlinscau@@163.com>
@@ -124,38 +124,14 @@ model.comp<-function(m1=NULL,m2=NULL,
           Pm[i] <- length(Nml[[3+(i-1)*43]])
           Nedf[i] <- Nml[[17+(i-1)*43]]
           #Mnames[i]<-deparse(substitute(Nm1[i]))
-        }
-      }else{
-          Nmls <- ceiling(length(Nml)/37) 
-          #LogL=Pm=Nedf=vector()
-          for(i in 1:Nmls){
-            LogL[i] <- Nml[[5+(i-1)*37]]
-            Pm[i] <- length(Nml[[1+(i-1)*37]])
-            Nedf[i] <- Nml[[13+(i-1)*37]]  # length
-            #Mnames[i]<-deparse(substitute(Nm1[i]))
-        }
-      }
+        }      
     }else {
       if(asrV==3){
         LogL <- c(m1[[2]],m2[[2]]) #fm[[2]]
         Pm <- c(length(m1[[3]]),length(m2[[3]])) #length(fm[[3]])
         Nedf <- c(m1[[17]],m2[[17]])
         Nmls <- 2
-        Mnames <- c(deparse(substitute(m1)),deparse(substitute(m2)))
-      }else{
-        #m1=fm1a;m2=fm1b
-        
-        #fm[[2]] c(m1$loglik,m2$loglik)#
-        LogL <- c(m1[[5]],m2[[5]]) 
-        
-        #c(length(m1$vparameters),length(m2$vparameters))
-        Pm <- c(length(m1[[1]]),length(m2[[1]])) 
-        
-        #c(m1$nedf,m2$nedf)
-        Nedf <- c(m1[[13]],m2[[13]])
-        Nmls <- 2
-        Mnames <- c(deparse(substitute(m1)),deparse(substitute(m2)))
-      }
+        Mnames <- c(deparse(substitute(m1)),deparse(substitute(m2)))     
     } 
         
     df<- data.frame(LogL=LogL,Npm=Pm)
