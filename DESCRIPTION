@@ -6,9 +6,9 @@ Authors@R: person("Yuanzhen", "Lin", email = "yzhlinscau@163.com", role = c("cre
 URL: http://github.com/yzhlinscau/AAFMM
 BugReports: http://github.com/yzhlinscau/AAFMM/issues
 Depends: R (>= 3.3.0)
-Imports: agricolae,agridat,amap,corrgram,desplot,dplyr,ggplot2,gplots,graphics,
-         lme4,MASS,Matrix,methods,msm,nlme,plyr,reshape2,sqldf,stats,tidyr
-Suggests: nadiv
+Imports: agricolae,amap,desplot,ggplot2,graphics,
+         MASS,Matrix,methods,msm,reshape2,stats
+Suggests: lme4,nlme,nadiv,dplyr,plyr,sqldf,tidyr
 Enhances: asreml,asreml4,breedR
 Date: 2018-07-27
 Author: Yuanzhen Lin [cre, aut]
