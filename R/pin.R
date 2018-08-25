@@ -11,13 +11,12 @@
 #' @aliases pin 
 #' @param object	 asreml or breedR results.
 #' @param formula	 formula for h2 or corr.
-#' @param asrV	 Index for asreml version, 3(default),or 4(new version).
+#' @param asrV	 Index for asreml version, 3(default).
 #' @param signif	 Index to output signif levels, F(default) for non-signif.
 #' @param corN	 Number of corr, 1(default).
 #' @param Rdf	 Index to output results to vector, F(default) for non-vector output. 
 #' @param digit	 Index for decimal number, 3(default).
 #' @param vres  Index(T) to return results in vectors, F(default) for direct results.
-#' @export pin4
 #' @export sig.level
 #' @export sig.level2
 #' @export read.file
@@ -171,7 +170,6 @@ pin.asreml <-
     
     if(!is.null(formula)){
       if(asrV==3) pframe <- as.list(object$gammas) 
-      else pframe <- as.list(object$vparameters)
       
       names(pframe) <- paste("V", seq(1, length(pframe)), sep = "")
       tvalue <- eval(deriv(formula[[length(formula)]], names(pframe)),pframe)
@@ -179,18 +177,10 @@ pin.asreml <-
       tname <- if(length(formula) == 3) formula[[2]] 
       else deparse(formula[[2]])
       
-      #if(asrV==4&object$sigma2==1){
-      #  X <- matrix(as.vector(attr(tvalue, "gradient")), ncol=1)
-      #  se <- as.vector(sqrt(t(X) %*% object$ai %*% X))
-      #}else{
         X <- as.vector(attr(tvalue, "gradient"))
         if(asrV==3){
           X[object$gammas.type==1] <- 0
           Vmat <- object$ai
-        }
-        if(asrV==4){
-          X[object$vparameters.type==1] <- 0 
-          Vmat <- object$ai@x
         }
         n <- length(pframe)
         i <- rep(1:n, 1:n)
@@ -198,7 +188,6 @@ pin.asreml <-
         k <- 1 + (i > j)
         
         se <- sqrt(sum(Vmat * X[i] * X[j] * k))
-      #}
       
       vv <- vector() 
       vv[1] <- round(tvalue,digit)
@@ -313,72 +302,6 @@ pin.remlf90 <-
 # ----------------------------------------------------------------------------
 # ----------------------------------------------------------------------------
 
-pin4 <- function (object, formula=NULL,signif=FALSE,
-                corN=NULL,digit=3){
-
-  if (!inherits(object, "asreml")) 
-    stop("Argument must be an asreml object")
-  
-  if(!is.null(formula)){
-    pframe <-as.list(object$vparameters)
-    names(pframe) <- paste("V", seq(1, length(pframe)), sep = "")
-    tvalue <- eval(deriv(formula[[length(formula)]], names(pframe)),pframe)
-    tname <- if (length(formula) == 3) formula[[2]] 
-             else deparse(formula[[2]])
-    
-    if(object$sigma2!=1){
-      X <- as.vector(attr(tvalue, "gradient"))
-      X[object$vparameters.type == 1] <- 0
-      n <- length(pframe)
-      i <- rep(1:n, 1:n)
-      j <- sequence(1:n)
-      k <- 1 + (i > j)
-      Vmat <- object$ai@x
-      se <- sqrt(sum(Vmat * X[i] * X[j] * k))
-    #} else {
-    #  X <- matrix(as.vector(attr(tvalue, "gradient")), ncol = 1)
-    #  se <- as.vector(sqrt(t(X) %*% object$ai %*% X))
-    }
-    
-    tvalue <- round(tvalue,digit)
-    se <- round(se,digit)
-    result <- data.frame(row.names = tname, Estimate = tvalue, SE = se)
-    
-    result1 <- result  
-    result1$sig.level <- AAFMM::sig.level(tvalue,se)
-    
-    cat("\n")
-    if(signif==TRUE){ 
-      print(format(result1, digits=digit,nsmall=digit))
-      cat("---------------")
-      cat("\nSig.level: 0'***' 0.001 '**' 0.01 '*' 0.05 'Not signif' 1\n")    
-    }else{
-      print(format(result, digits=digit,nsmall=digit))
-    }
-    cat("\n")
-  }
-  
-  if(is.null(formula)){
-
-    if(is.null(corN)){
-      cat("\nAttension: since no N value, here just show fisrt one corr!!\n\n")
-      corN <- 1
-    }
-    n <- corN
-    df <- summary(object)$varcomp
-
-    tvalue <- as.vector(df[1:n,1])
-    se <- as.vector(df[1:n,2])
-
-    tname <- rownames(summary(object)$varcomp)[1:n]
-    siglevel <- AAFMM::sig.level(tvalue,se)
-
-    result2 <- data.frame(row.names=tname,Estimate=tvalue, SE=se, sig.level=siglevel)
-    print(format(result2, digits=digit,nsmall=digit))
-    cat("---------------")
-    cat("\nSig.level: 0'***' 0.001 '**' 0.01 '*' 0.05 'Not signif' 1\n\n")
-  }
-}
 
 # sig.level functions
 
