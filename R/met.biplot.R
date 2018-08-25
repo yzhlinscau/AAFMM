@@ -65,17 +65,12 @@ met.biplot <-
     
     # fa loading, site n., 1(Psi) + fa n.
     if(asrV==3) {
-      gamma<-asreml::summary(object)$varcomp[1]
+      gamma<-summary(object)$varcomp[1]
       rownm<-row.names(gamma)
       aimnm<-rownm[grep(':fa',rownm)]
       arr<-gamma[aimnm,]
     } 
-    if(asrV==4) {
-      varcomp<-asreml4::summary(object)$varcomp[2]
-      rownm<-row.names(varcomp)
-      aimnm<-rownm[grep(':fa',rownm)]
-      arr<-varcomp[aimnm,]
-    }
+
     Xfam<-matrix(arr,siteN,(1+faN))
     
     fa.name<-paste("FA",1:faN,sep="")
