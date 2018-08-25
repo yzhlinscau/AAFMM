@@ -199,13 +199,13 @@ library(breedR)
 
 bdR <- remlf90(h5 ~1+Spacing, random =~ Rep+Fam, data = df)
 
-Var(bdR)
+AAFMM::Var(bdR)
 ##               gamma component      se   z.ratio constraint
 ## Rep      0.27067993   1507.20 1090.50  1.382118   Positive
 ## Fam      0.07157789    398.56  151.85  2.624695   Positive
 ## Residual 1.00000000   5568.20  284.85 19.547832   Positive
 
-pin(bdR, h2 ~4*V2/(V2+V3))
+AAFMM::pin(bdR, h2 ~4*V2/(V2+V3))
 ##    Estimate    SE
 ## h2    0.267 0.097 
 
@@ -214,13 +214,13 @@ library(asreml)
 asr<-asreml(h5~1+Spacing, random =~ Rep+Fam, data = df)
 
 #summary(asr)$varcomp[,1:3]
-Var(asr)
+AAFMM::Var(asr)
 ##                  gamma component std.error   z.ratio constraint
 ## Rep!Rep.var 0.27068333 1507.2276 1090.4791  1.382170   Positive
 ## Fam!Fam.var 0.07157818  398.5639  151.8484  2.624748   Positive
 ## R!variance  1.00000000 5568.2319  284.8484 19.548054   Positive
 
-pin(asr, h2 ~4*V2/(V2+V3))
+AAFMM::pin(asr, h2 ~4*V2/(V2+V3))
 ##    Estimate     SE
 ## h2    0.267 0.0975 
 ```
@@ -228,12 +228,12 @@ pin(asr, h2 ~4*V2/(V2+V3))
 ``` r
 mydata<-df[,-1:-5]
 
-heatmap1(mydata,type='data',Sig=FALSE,Nbreaks = 8)
+AAFMM::heatmap1(mydata,type='data',Sig=FALSE,Nbreaks = 8)
 ```
 <img src="README_files/img/heatmap1.png" width="65%" style="display: block; margin: auto;" />
 
 ``` r
-heatmap1(mydata,type='data',Sig=TRUE,Nbreaks = 8)
+AAFMM::heatmap1(mydata,type='data',Sig=TRUE,Nbreaks = 8)
 ```
 <img src="README_files/img/heatmap2.png" width="65%" style="display: block; margin: auto;" />
 
