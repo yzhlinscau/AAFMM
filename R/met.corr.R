@@ -108,12 +108,12 @@ function(object,site,faN=1,kn=NULL){
 
   if(n<16){
     #windows(10,8)
-    corrgram::corrgram(df, type="cor",order=TRUE, 
-                       lower.panel=panel.pie,
-                       upper.panel=panel.conf, 
-                       text.panel=panel.txt,
-                       main="Fig.2 Correlogram of different sites")
-  }
+  #  corrgram::corrgram(df, type="cor",order=TRUE, 
+  #                     lower.panel=panel.pie,
+  #                     upper.panel=panel.conf, 
+  #                     text.panel=panel.txt,
+  #                     main="Fig.2 Correlogram of different sites")
+  #}
   
   cat("\nCov\\Var\\Corr matrix\n\n")
   rownames(df.2) <- c(paste("S",levels(site),sep=''))
