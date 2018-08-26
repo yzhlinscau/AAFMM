@@ -18,7 +18,7 @@
 #' Yuanzhen Lin. R & ASReml-R Statistics. China Forestry Publishing House. 2016 
 #' AAFMM website:https://github.com/yzhlinscau/AAFMM
 #' @examples 
-#' 
+#' \dontrun{
 #' library(AAFMM)
 #' 
 #' data(ir.sp)
@@ -29,7 +29,7 @@
 #' sp1<-ir2r.sp(ir.sp2,row.max=10)
 #' sp2<-ir2r.sp(ir.sp2,col.max=20)
 #' sp3<-ir2r.sp(ir.sp2,row.max=10,col.max=20)
-#' 
+#' }
 #' 
 
 
