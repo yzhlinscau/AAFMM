@@ -42,7 +42,7 @@ r_binary_packages:
 r_packages: devtools
 
 # Install manually because dev vdiffr is not compatible with Appveyor yet
-r_github_packages: famuvie/breedR
+# r_github_packages: famuvie/breedR
 
 env:
   global:
