@@ -21,7 +21,7 @@ ir2r.sp(object, row.max = NULL, col.max = NULL)
 further plot with spd.plot().
 }
 \examples{
-
+\dontrun{
 library(AAFMM)
 
 data(ir.sp)
@@ -33,7 +33,7 @@ sp1<-ir2r.sp(ir.sp2,row.max=10)
 sp2<-ir2r.sp(ir.sp2,col.max=20)
 sp3<-ir2r.sp(ir.sp2,row.max=10,col.max=20)
 
-
+}
 }
 \references{
 Yuanzhen Lin. R & ASReml-R Statistics. China Forestry Publishing House. 2016 
