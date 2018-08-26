@@ -32,7 +32,7 @@ export(snp.batch)
 export(spd.plot)
 
 import(amap,agricolae,
-       dplyr,ggplot2,
+       ggplot2,
        MASS,Matrix,
        methods,msm,stats,
        graphics,reshape2)
