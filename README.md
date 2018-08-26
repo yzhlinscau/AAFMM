@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/yzhlinscau/AAFMM.svg?branch=master)](https://travis-ci.com/yzhlinscau/AAFMM)
+# [![Build Status](https://travis-ci.com/yzhlinscau/AAFMM.svg?branch=master)](https://travis-ci.com/yzhlinscau/AAFMM)
 [![DOI](https://zenodo.org/badge/145793825.svg)](https://zenodo.org/badge/latestdoi/145793825)
 
 
