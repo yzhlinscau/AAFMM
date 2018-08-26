@@ -1,9 +1,22 @@
-language: r
+language: R
+cache: packages
+sudo: true
+dist: trusty
 
 # We have some warnings due to Misztal's binaries
 # This avoids issuing an error  
 warnings_are_errors: false
-sudo: required
+
+addons:
+  apt:
+    packages:
+      - libfreetype6
+
+r:
+- 3.1
+- 3.2
+- 3.3
+- release
 
 r_build_args: --no-build-vignettes
 
@@ -23,8 +36,19 @@ r_binary_packages:
   - nlme 
   - tidyr
   - dplyr
+  - klar
+  
+# work around temporary travis + R 3.5 bug
+r_packages: devtools
 
-before_install:
+# Install manually because dev vdiffr is not compatible with Appveyor yet
+r_github_packages: famuvie/breedR
+
+env:
+  global:
+  - _R_CHECK_FORCE_SUGGESTS_=false
+
+#before_install:
   # Travis is on 64bit and it will not be able to run 32bit binaries
   # through system2() with argument stdout, which causes the call
   # to be made through a popen() system call.
@@ -34,3 +58,10 @@ before_install:
   # - Rscript -e "install.packages(c('sp', 'Matrix', 'splines'), repos = 'http://cran.rstudio.com/')"
   #- Rscript -e "install.packages('INLA', repos = 'http://www.math.ntnu.no/inla/R/testing')"
   #- Rscript -e 'install.packages("nlme", lib="/home/travis/R-bin/lib/R/library/")'
+  
+  before_install:
+  - sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable --yes
+  - sudo apt-get --yes --force-yes update -qq
+  - sudo apt-get install --yes libudunits2-dev libproj-dev libgeos-dev libgdal-dev
+  - Rscript -e 'update.packages(ask = FALSE)'
+  
