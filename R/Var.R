@@ -88,7 +88,7 @@ Var.lme <- function (object) {
     Var<-nlme::VarCorr(object)
     suppressWarnings(storage.mode(Var) <- "numeric")
     vc<-Var[!is.na(Var)]
-    Var1<-matrix(vc,nrow=2,byrow=T)
+    Var1<-matrix(vc,nrow=2,byrow=TRUE)
     
     # change sd to se
     ncM<-ncol(Var1)
