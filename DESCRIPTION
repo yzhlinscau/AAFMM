@@ -19,7 +19,7 @@ Description: This package adds some functions when fitting mixed models in R pac
     obtained upon purchase from 'VSN' international(<http://www.vsni.co.uk/software/asreml>). Also some 
     functions is conjuncted with the R package 'breedR' which can be freely obtained from 'github'
     (<https://github.com/famuvie/breedR>)
-License: GPL (>= 2)
+License: GPL-3.0
 LazyData: yes
 NeedsCompilation: no
 Repository: CRAN
