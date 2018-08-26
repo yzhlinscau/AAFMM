@@ -9,6 +9,9 @@
 #' @aliases plot1 
 #' @param object an object of breedR result or multi-comparison.
 #' @param mulT multi-trait model(default, FALSE).
+#' @param x.lbls x axis label
+#' @param y.lbls y axis label
+#' @param y.zero y axis tick from zero (0, default) or other value.
 #' 
 #' @export 
 plot1 <- function(object,mulT,x.lbls,y.lbls,y.zero) {
