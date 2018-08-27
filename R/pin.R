@@ -17,11 +17,6 @@
 #' @param Rdf	 Index to output results to vector, F(default) for non-vector output. 
 #' @param digit	 Index for decimal number, 3(default).
 #' @param vres  Index(T) to return results in vectors, F(default) for direct results.
-#' @export sig.level
-#' @export sig.level2
-#' @export read.file
-#' @export read.example
-#' @export fdata
 #' @export
 pin <- function(object,formula,asrV,signif,
                 corN,Rdf,digit,vres){
@@ -320,19 +315,6 @@ sig.level <- function(tvalue,se,...){
   siglevel
 }
 
-# p-value to sig levels
-sig.level2 <- function(x){
-  tt <- vector() #=NULL
-  n <- length(x)
-  for(i in 1:n){
-    if(abs(x[i])<0.001)     tt[i] <- '***'
-    else if(abs(x[i])<0.01) tt[i] <- '**'
-    else if(abs(x[i])<0.05) tt[i] <- '*'
-    else if(abs(x[i])<0.10) tt[i] <- '.' 
-    else tt[i] <- ''
-  }
-  return(tt)
-}
 
 
 # for closed t-test counting p-value
@@ -340,40 +322,3 @@ sig.level2 <- function(x){
 # p=1-pt(ratio,Inf)
 # using df=Inf, because we generally have data points more than 99.
 
-# ----------------------------------------------------------------------------
-# function similar to asreml.read.table():
-# making variables starting with capital letter to factors.
-# ----------------------------------------------------------------------------
-
-read.file<-function(file,header=TRUE,sep=',',dec='.',...){
-  df<-read.table(file=file,header=header,sep=sep,dec=dec,...)
-  aa<-names(df)
-  
-  sn<-grep('^[A-Z]{1}',aa)
-  for(i in sn) df[,i]<-factor(df[,i])
-  
-  return(df)
-}
-  
-fdata<-function(data,faS=NULL){
-  data<-as.data.frame(data)
-  if(is.null(faS)){
-    aa<-names(data)
-    
-    sn<-grep('^[A-Z]{1}',aa)
-  } else sn<-faS
-  
-  for(i in sn) data[,i]<-factor(data[,i])
-  
-  return(data)
-}
-  
-read.example <- function(package,setpath = FALSE) {
-  if (setpath== FALSE) {
-    dir(system.file("extdata", package = package))
-  } else {
-    path<-system.file("extdata", package = package)
-    setwd(path)
-  }
-} 
-  
