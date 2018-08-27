@@ -17,6 +17,7 @@
 #' @param Rdf	 Index to output results to vector, F(default) for non-vector output. 
 #' @param digit	 Index for decimal number, 3(default).
 #' @param vres  Index(T) to return results in vectors, F(default) for direct results.
+#' @export sig.level
 #' @export
 pin <- function(object,formula,asrV,signif,
                 corN,Rdf,digit,vres){
